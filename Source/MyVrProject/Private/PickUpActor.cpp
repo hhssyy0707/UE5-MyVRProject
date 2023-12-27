@@ -53,7 +53,7 @@ void APickUpActor::Grabbed(USkeletalMeshComponent* handMesh, EAttachmentRule att
 	else if (attachmentRules == EAttachmentRule::SnapToTarget)
 	{
 		FAttachmentTransformRules rules = FAttachmentTransformRules::SnapToTargetNotIncludingScale;
-		AttachToComponent(handMesh, rules, FName("GrabSocket"));
+		AttachToComponent(handMesh, rules, FName("GrabSocket")); // 붙일 소켓 이름 
 		SetActorRelativeLocation(locationOffset);
 	}
 }
@@ -61,10 +61,10 @@ void APickUpActor::Grabbed(USkeletalMeshComponent* handMesh, EAttachmentRule att
 void APickUpActor::Released(FVector deltaPosition, FQuat deltaRotaion)
 {
 	DetachFromActor(FDetachmentTransformRules::KeepWorldTransform);
-	boxComp->SetSimulatePhysics(true);
+	boxComp->SetSimulatePhysics(true); //순서: Detach 후 Physics 켜주기
 
-	// 릴리즈될 당시의 속도와 각속도를 추가해준다.
-	if(deltaPosition.Size() > 0.05f)
+	// 던질때(Released될 때) 당시의 속도와 각속도를 추가해준다.
+	if(deltaPosition.Size() > 0.05f)// 사람 손의 기본적인 움직임이 있어서 델타값이 0일 수는 없어서 0.05 이상일 때만
 	{
 		boxComp->AddImpulse(deltaPosition * throwPower);
 		boxComp->AddTorqueInRadians(deltaRotaion.GetRotationAxis() * rotPower);
