@@ -25,6 +25,7 @@ void UVRHandAnimComponent::BeginPlay()
 
 	// ...
 	Player = GetOwner<AVR_Player>();
+
 	if (Player != nullptr) {
 		handAnim_Left = Cast<UVRHandAnimInstance>(Player->leftHand->GetAnimInstance());
 
