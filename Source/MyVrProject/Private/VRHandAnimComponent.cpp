@@ -59,17 +59,17 @@ void UVRHandAnimComponent::SetupPlayerInputComponent(UEnhancedInputComponent* En
 	EnhancedInputComponent->BindAction(inputs[2], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputIndexTriggerValue_Left);
 	EnhancedInputComponent->BindAction(inputs[3], ETriggerEvent::Triggered, this, &UVRHandAnimComponent::InputGripValue_Left);
 	EnhancedInputComponent->BindAction(inputs[3], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputGripValue_Left);
-	EnhancedInputComponent->BindAction(inputs[4], ETriggerEvent::Triggered, this, &UVRHandAnimComponent::InputIndexTriggerTouch_Left);
+	EnhancedInputComponent->BindAction(inputs[4], ETriggerEvent::Started, this, &UVRHandAnimComponent::InputIndexTriggerTouch_Left);
 	EnhancedInputComponent->BindAction(inputs[4], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputIndexTriggerTouch_Left);
-	EnhancedInputComponent->BindAction(inputs[5], ETriggerEvent::Triggered, this, &UVRHandAnimComponent::InputThumbstickTouch_Left);
+	EnhancedInputComponent->BindAction(inputs[5], ETriggerEvent::Started, this, &UVRHandAnimComponent::InputThumbstickTouch_Left);
 	EnhancedInputComponent->BindAction(inputs[5], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputThumbstickTouch_Left);
 	EnhancedInputComponent->BindAction(inputs[6], ETriggerEvent::Triggered, this, &UVRHandAnimComponent::InputIndexTriggerValue_Right);
 	EnhancedInputComponent->BindAction(inputs[6], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputIndexTriggerValue_Right);
 	EnhancedInputComponent->BindAction(inputs[7], ETriggerEvent::Triggered, this, &UVRHandAnimComponent::InputGripValue_Right);
 	EnhancedInputComponent->BindAction(inputs[7], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputGripValue_Right);
-	EnhancedInputComponent->BindAction(inputs[8], ETriggerEvent::Triggered, this, &UVRHandAnimComponent::InputIndexTriggerTouch_Right);
+	EnhancedInputComponent->BindAction(inputs[8], ETriggerEvent::Started, this, &UVRHandAnimComponent::InputIndexTriggerTouch_Right);
 	EnhancedInputComponent->BindAction(inputs[8], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputIndexTriggerTouch_Right);
-	EnhancedInputComponent->BindAction(inputs[9], ETriggerEvent::Triggered, this, &UVRHandAnimComponent::InputThumbstickTouch_Right);
+	EnhancedInputComponent->BindAction(inputs[9], ETriggerEvent::Started, this, &UVRHandAnimComponent::InputThumbstickTouch_Right);
 	EnhancedInputComponent->BindAction(inputs[9], ETriggerEvent::Completed, this, &UVRHandAnimComponent::InputThumbstickTouch_Right);
 }
 
@@ -97,7 +97,9 @@ void UVRHandAnimComponent::InputIndexTriggerTouch_Left(const FInputActionValue& 
 void UVRHandAnimComponent::InputThumbstickTouch_Left(const FInputActionValue& value)
 {
 	if (handAnim_Left != nullptr) {
-		handAnim_Left->PoseAlphaThumbUp_cpp = value.Get<bool>();
+		//handAnim_Left->PoseAlphaThumbUp_cpp = value.Get<bool>();
+		handAnim_Left->PoseAlphaThumbUp_cpp = value.Get<bool>() == true?0:1.0f;
+		GEngine->AddOnScreenDebugMessage(-1,2.0f,FColor::Blue, FString::Printf(TEXT("%s"),value.Get<bool>()? *FString("True") : *FString(TEXT("False"))));
 	}
 }
 

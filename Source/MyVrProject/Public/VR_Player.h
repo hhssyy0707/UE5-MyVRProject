@@ -64,6 +64,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Inputs")
 	class UInputMappingContext* imc;
 
+	UPROPERTY()
+	class UVRBodyAnimInstance* bodyAnim;
+
 	/*UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Inputs")
 	class UInputAction* ia_rightTriggerBool;
 

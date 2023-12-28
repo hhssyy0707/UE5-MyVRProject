@@ -16,6 +16,8 @@ class MYVRPROJECT_API UVRHandAnimInstance : public UAnimInstance
 	
 
 	public:
+	virtual void  NativeUpdateAnimation(float DeltaSeconds) override;
+
 	UPROPERTY(EditAnywhere,BlueprintReadOnly ,Category = MySettings)
 	float PoseAlphaGrasp_cpp = 0;
 	
@@ -38,4 +40,6 @@ class MYVRPROJECT_API UVRHandAnimInstance : public UAnimInstance
 	
 	UPROPERTY(EditAnywhere,BlueprintReadOnly ,Category = MySettings)
 	bool bMirror_cpp = false;
+
+
 };
