@@ -56,6 +56,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class UGrabComponent* grabComp;
 
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
+	class UVRHandAnimComponent* HandAnimComp;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Inputs")
 	class UInputMappingContext* imc;
