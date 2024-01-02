@@ -7,6 +7,7 @@
 #include "Components/TextRenderComponent.h"
 #include "PickUpActor.h"
 #include "MotionControllerComponent.h"
+#include "Haptics/HapticFeedbackEffect_Curve.h"
 
 
 UGrabComponent::UGrabComponent()
@@ -118,7 +119,16 @@ void UGrabComponent::GrabObject()
 		{
 			currentObject->Grabbed(player->rightHand, EAttachmentRule::SnapToTarget);
 			prevLoc = player->rightController->GetComponentLocation();// 초기화 부분 , 안하면 델타 너무 커진다?
-			player->rightLog->SetText(FText::FromString(objects));
+			
+			//player->rightLog->SetText(FText::FromString(objects));
+			//231229
+			prevQuat = player->rightController->GetComponentQuat();
+
+			// 진동 효과를 준다.
+			if (nullptr != player->PC && nullptr != GrabHaptic)
+			{
+				player->PC->PlayHapticEffect(GrabHaptic, EControllerHand::Right, 1, false);
+			}
 		}
 	}
 	else

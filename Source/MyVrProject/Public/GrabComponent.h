@@ -22,6 +22,12 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void SetupPlayerInputComponent(class UEnhancedInputComponent* enhancedInputComponent, TArray<class UInputAction*> inputs);
 
+	UPROPERTY()
+	class APickUpActor* CurrentlyGrabbedObject;
+	
+	UPROPERTY(EditAnywhere, Category = "MySettings")
+	class UHapticFeedbackEffect_Curve* GrabHaptic;
+
 
 private:
 	class AVR_Player* player;

@@ -59,6 +59,13 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class UVRHandAnimComponent* HandAnimComp;
+	
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
+	class UStaticMeshComponent* GazeMeshComp;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
+	class UGazeComponent* GazeComp;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Inputs")
@@ -91,6 +98,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Inputs")
 	TArray<class UInputAction*> ia_inputs;
 
+	APlayerController* PC;
+
+	//float RecenterTickTimer{0.f};
+	float recenterTimer{0.f};
+
+	UPROPERTY(EditAnywhere)
+	float RecenterHoldAmountSeconds{1.0f};
+
+	bool RecenterTick{false};
+
 
 private:
 	void RightTriggerInput_Bool(const FInputActionValue& value);
@@ -100,4 +117,9 @@ private:
 	void PlayerMove(const FInputActionValue& value);
 	void PlayerRotate(const FInputActionValue& value);
 	void BasicTeleport(float sightRange, FVector direction, FVector pivot);
+	
+	void Recenter(const FInputActionValue& value);
+	void StopRecenter(const FInputActionValue& value);
+	void RecenterStart(const FInputActionValue& value);
+
 };
