@@ -35,11 +35,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class USkeletalMeshComponent* leftHand;
 
+	//240103 추가
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
+	class UWidgetInteractionComponent* LeftPointer;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class UMotionControllerComponent* rightController;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class USkeletalMeshComponent* rightHand;
+
+	//240103 추가
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
+	class UWidgetInteractionComponent* RightPointer;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class UTextRenderComponent* leftLog;
@@ -56,6 +64,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class UGrabComponent* grabComp;
 
+	//240103 추가
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
+	class UWidgetPointerComp* WidgetPointerComp; //제어, 클릭 기능이 들어가있는 컴포넌트
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class UVRHandAnimComponent* HandAnimComp;

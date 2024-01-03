@@ -17,6 +17,9 @@
 #include "VRHandAnimComponent.h"
 #include "VRBodyAnimInstance.h"
 #include "GazeComponent.h"
+#include "Components/WidgetInteractionComponent.h"
+#include "WidgetPointerComp.h"
+
 
 
 AVR_Player::AVR_Player()
@@ -53,6 +56,10 @@ AVR_Player::AVR_Player()
 	leftLog->SetWorldSize(20);
 	leftLog->SetTextRenderColor(FColor(255, 255, 0));
 
+	//240103
+	LeftPointer = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("Left Widget Pointer"));
+	LeftPointer->SetupAttachment(leftHand);
+
 	rightController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("Right Controller"));
 	rightController->SetupAttachment(RootComponent);
 	rightController->SetRelativeLocation(FVector(50, 30, -10));
@@ -71,6 +78,10 @@ AVR_Player::AVR_Player()
 	rightLog->SetWorldSize(20);
 	rightLog->SetTextRenderColor(FColor(255, 255, 0));
 
+	//240103
+	RightPointer = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("Right Widget Pointer"));
+	RightPointer->SetupAttachment(rightHand);
+
 	teleportFX = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Teleport Effect"));
 	teleportFX->SetupAttachment(leftHand);
 
@@ -86,6 +97,9 @@ AVR_Player::AVR_Player()
 	HandAnimComp = CreateDefaultSubobject<UVRHandAnimComponent>(TEXT("VR Hand Anim Component"));
 
 	GazeComp = CreateDefaultSubobject<UGazeComponent>(TEXT("Gaze Component")); //입력은 안하고 붙이는 것만 할 거야
+
+	//240103 UI 클릭하기 위한 위젯포인터 컴포넌트 추가
+	WidgetPointerComp = CreateDefaultSubobject<UWidgetPointerComp>(TEXT("Widget Pointer Component"));
 }
 
 void AVR_Player::BeginPlay()
@@ -166,6 +180,7 @@ void AVR_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 		moveComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs);
 		grabComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs);
 		HandAnimComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs);
+		WidgetPointerComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs); //240103 추가
 	}
 }
 

@@ -72,3 +72,7 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+Content/Movies/ARA_2_winter_360.mp4
+Content/Movies/ARA_3_arch_360.mp4
+*.mp4
+*.apk
