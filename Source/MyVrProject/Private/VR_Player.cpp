@@ -19,6 +19,9 @@
 #include "GazeComponent.h"
 #include "Components/WidgetInteractionComponent.h"
 #include "WidgetPointerComp.h"
+#include "MyCarActor.h"
+#include "EngineUtils.h"
+#include "CarControllerComponent.h"
 
 
 
@@ -100,6 +103,8 @@ AVR_Player::AVR_Player()
 
 	//240103 UI 클릭하기 위한 위젯포인터 컴포넌트 추가
 	WidgetPointerComp = CreateDefaultSubobject<UWidgetPointerComp>(TEXT("Widget Pointer Component"));
+
+	CarControllerComp = CreateDefaultSubobject<UCarControllerComponent>(TEXT("Car Controller Component"));
 }
 
 void AVR_Player::BeginPlay()
@@ -124,6 +129,11 @@ void AVR_Player::BeginPlay()
 	//231228
 	bodyAnim = Cast<UVRBodyAnimInstance>(GetMesh()->GetAnimInstance());
 
+	//240104
+	//필드에 차 액터를 찾아서 변수에 할당한다.
+	for (TActorIterator<AMyCarActor> car(GetWorld()); car; ++car) {
+		MyFirstCar = *car;
+	}
 }
 
 void AVR_Player::Tick(float DeltaTime)
@@ -145,6 +155,10 @@ void AVR_Player::Tick(float DeltaTime)
 	{
 		recenterTimer += DeltaTime;
 	}
+
+	/*if (MyFirstCar != nullptr) {
+		MyFirstCar->RotateCar(0.1f);
+	}*/
 }
 
 void AVR_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -181,6 +195,7 @@ void AVR_Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 		grabComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs);
 		HandAnimComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs);
 		WidgetPointerComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs); //240103 추가
+		CarControllerComp->SetupPlayerInputComponent(enhancedInputComponent, ia_inputs); //240104 추가
 	}
 }
 

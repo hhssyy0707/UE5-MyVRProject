@@ -77,7 +77,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
 	class UGazeComponent* GazeComp;
-
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Components")
+	class UCarControllerComponent* CarControllerComp;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Inputs")
 	class UInputMappingContext* imc;
@@ -108,6 +110,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "MySettings|Inputs")
 	TArray<class UInputAction*> ia_inputs;
+
+	UPROPERTY(EditAnywhere, Category = "MySettings|Variables")
+	class AMyCarActor* MyFirstCar;
+
 
 	APlayerController* PC;
 
